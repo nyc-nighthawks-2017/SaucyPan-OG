@@ -38,22 +38,17 @@ Rails.application.routes.draw do
 
 
 
+	get '/recipes/:id/instructions' => 'instructions#index'
+	post '/recipes/:id/instructions' => 'instructions#create'
+	put '/instructions/:id' => 'instructions#update'
+	delete '/instructions/:id' => 'instructions#delete'
 
+	get '/recipes/:recipe_id/ingredients' => 'ingredients#index'
+	post '/recipes/:recipe_id/ingredients' => 'ingredients#create'
+	delete '/recipes/:recipe_id/ingredients/:ingredient_id' => 'ingredients#delete'
+	get '/ingredients/:ingredient_id' => 'ingredients#show'
+	put '/ingredients/:ingredient_id' => 'ingredients#update'
 
-
-
-
-
-
-
-
-
-  # Adams routes
-  get '/recipes/:recipe_id/ingredients' => 'ingredients#index'
-  post '/recipes/:recipe_id/ingredients' => 'ingredients#create'
-  delete '/recipes/:recipe_id/ingredients/:ingredient_id' => 'ingredients#delete'
-  get '/ingredients/:ingredient_id' => 'ingredients#show'
-  put '/ingredients/:ingredient_id' => 'ingredients#update'
 
 
 end
