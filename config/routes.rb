@@ -49,6 +49,11 @@ Rails.application.routes.draw do
 	get '/ingredients/:ingredient_id' => 'ingredients#show'
 	put '/ingredients/:ingredient_id' => 'ingredients#update'
 
+	get '/recipes/:recipe_id/ratings' => 'ratings#recipe_index'
+	post '/recipes/:recipe_id/ratings' => 'rating#create'
+ 	get '/users/:user_id/ratings' => 'ratings#user_index'
+	delete '/ratings/:rating_id' => 'rating#delete'
+
 
 
 end
