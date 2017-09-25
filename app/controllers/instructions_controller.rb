@@ -16,4 +16,9 @@ class InstructionsController < ApplicationController
     end
   end
 
+  def delete
+    instruction = Instruction.find_by(id: params[:id])
+    instruction.destroy
+    render json: instruction.recipes[0]
+  end
 end
