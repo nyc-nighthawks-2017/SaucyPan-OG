@@ -1,9 +1,4 @@
 class UsersController < ApplicationController
-  def index
-    users = User.all
-
-    render json: users
-  end
 
   def show
     user = User.find_by(id: params[:id])
@@ -13,7 +8,11 @@ class UsersController < ApplicationController
       rated_recipes = user.rated_recipes
 
       user_data = {
-        user_info: user,
+        user_info: {
+          first_name: user.first_name,
+          last_name: user.last_name,
+          username: user.username
+          },
         submitted_recipes: submitted_recipes,
         rated_recipes: rated_recipes
       }
@@ -26,11 +25,13 @@ class UsersController < ApplicationController
 
 
   def create
-    binding.pry
     user = User.new(user_params)
 
-    user.save
-
+    if user.save
+      render json: user
+    else
+      render json: user.errors.full_messages
+    end
   end
 
   private

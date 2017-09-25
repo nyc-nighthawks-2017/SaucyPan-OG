@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
 
 
-  resources :users
+  post '/users', to: 'users#create'
+  get '/users/:id', to: 'users#show'
+  put '/users/:id', to: 'users#update'
 
 
 
