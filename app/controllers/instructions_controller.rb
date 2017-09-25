@@ -1,7 +1,19 @@
 class InstructionsController < ApplicationController
   def index
     recipe = Recipe.find_by(id: params[:id])
-    instructions = recipe.instructions
+    instructions = recipe.instructions.order('position ASC')
     render json: instructions
   end
+
+  def create
+    recipe = Recipe.find_by(id: params[:id])
+    instruction = Instruction.new(position: params[:position], step: params[:step])
+    instruction.recipes.push(recipe)
+    if instruction.save
+      render json: instruction.recipes[0]
+    else
+      render json: instruction.errors.full_messages
+    end
+  end
+
 end

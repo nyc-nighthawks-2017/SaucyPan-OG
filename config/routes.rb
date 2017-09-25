@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
  # Instructions
  get '/recipes/:id/instructions' => 'instructions#index'
+ post '/recipes/:id/instructions' => 'instructions#create'
 
 
 end
