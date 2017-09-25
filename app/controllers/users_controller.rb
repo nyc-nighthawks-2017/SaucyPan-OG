@@ -28,7 +28,29 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      render json: user
+      render json: {
+        user: {
+          username: user.username,
+          first_name: user.first_name,
+          last_name: user.last_name
+        }
+      }
+    else
+      render json: user.errors.full_messages
+    end
+  end
+
+  def update
+    user = User.find_by(id: params[:id])
+
+    if user.update_attributes(user_params)
+      render json: {
+        user: {
+          username: user.username,
+          first_name: user.first_name,
+          last_name: user.last_name
+        }
+      }
     else
       render json: user.errors.full_messages
     end
