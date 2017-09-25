@@ -12,9 +12,9 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    ingredient = Ingredient.new(ingredient_params)
+    ingredient = Ingredient.new(params[:name])
     ingredient.save
-    recipe = Recipe.find_by(id: params[:id])
+    recipe = Recipe.find_by(id: params[:ingredient_id])
     ingredients_recipe = IngredientsRecipe.new(recipe: recipe, ingredient: ingredient)
     ingredients_recipe.save
     render json: ingredient
