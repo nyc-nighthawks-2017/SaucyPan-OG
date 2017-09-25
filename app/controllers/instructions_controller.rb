@@ -7,7 +7,7 @@ class InstructionsController < ApplicationController
 
   def create
     recipe = Recipe.find_by(id: params[:id])
-    instruction = Instruction.new(position: params[:position], step: params[:step])
+    instruction = Instruction.new(step: params[:step], position: params[:position])
     instruction.recipes.push(recipe)
     if instruction.save
       render json: instruction.recipes[0]
@@ -16,9 +16,27 @@ class InstructionsController < ApplicationController
     end
   end
 
+  def update
+    instruction = Instruction.find_by(id: params[:id])
+    if instruction.update(step: params[:step], position: params[:position])
+      render json: instruction
+    else
+      render json: "Instruction failed to update."
+    end
+  end
+
   def delete
     instruction = Instruction.find_by(id: params[:id])
-    instruction.destroy
-    render json: instruction.recipes[0]
+    if instruction
+      instruction.destroy
+      render json: instruction.recipes[0]
+    else
+      render json: instruction.errors.full_messages
+    end
   end
+
+# private
+#   def instruction_params
+#     params.require(:instruction).permit(:position, :step)
+#   end
 end
