@@ -64,14 +64,11 @@ ActiveRecord::Schema.define(version: 20170925161903) do
     t.string "category", null: false
     t.integer "difficulty_level", null: false
     t.integer "prep_time", null: false
-    t.text "directions", null: false
     t.string "creator", null: false
-    t.bigint "ingredient_id", null: false
     t.bigint "submitter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_recipes_on_category"
-    t.index ["ingredient_id"], name: "index_recipes_on_ingredient_id"
     t.index ["submitter_id"], name: "index_recipes_on_submitter_id"
   end
 

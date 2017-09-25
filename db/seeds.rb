@@ -11,6 +11,8 @@ User.destroy_all
 Recipe.destroy_all
 Ingredient.destroy_all
 Rating.destroy_all
+IngredientsRecipe.destroy_all
+InstructionsRecipe.destroy_all
 
 categories = ["Appetizers", "Main Courses", "Desserts", "Sides"]
 
@@ -29,7 +31,7 @@ end
 end
 
 100.times do
-  Instructions.create(position: rand(1..5), step: Faker::ChuckNorris.fact)
+  Instruction.create(position: rand(1..5), step: Faker::ChuckNorris.fact)
 end
 
 20.times do
@@ -40,6 +42,6 @@ end
   IngredientsRecipe.create(amount: rand(20), measurement: Faker::Lorem.word, recipe: Recipe.all.sample, ingredient: Ingredient.all.sample)
 end
 
-100.times do
+3.times do
   Rating.create(recipe: Recipe.all.sample, rater: User.all.sample, rating: rand(1..5))
 end

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :submitted_recipes, foreign_key: :submitter_id
+  has_many :submitted_recipes, class_name: "Recipe", foreign_key: :submitter_id
   has_many :ratings, foreign_key: :rater_id
   has_many :rated_recipes, through: :ratings, source: :recipe
 
