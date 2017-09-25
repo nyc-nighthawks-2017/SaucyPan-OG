@@ -8,9 +8,9 @@
 require 'faker'
 
 User.destroy_all
-Reciple.destroy_all
+Recipe.destroy_all
 Ingredient.destroy_all
-Ratings.destroy_all
+Rating.destroy_all
 
 categories = ["Appetizers", "Main Courses", "Desserts", "Sides"]
 
@@ -21,11 +21,11 @@ User.create(username: "username", password: "password", first_name: "first", las
 end
 
 50.times do
-  Recipe.create(name: Faker::Food.dish ,category: categories.all.sample, difficulty_level: rand(1..5), prep_time: rand(1..120), creator: Faker::Name.name_with_middle, submitter: User.all.sample)
+  Recipe.create(name: Faker::Name.first_name ,category: categories.sample, difficulty_level: rand(1..5), prep_time: rand(1..120), creator: Faker::Name.name_with_middle, submitter: User.all.sample)
 end
 
 100.times do
-  Ingredient.create(name: Faker::Food.ingredient)
+  Ingredient.create(name: Faker::Lorem.word)
 end
 
 100.times do
@@ -37,7 +37,7 @@ end
 end
 
 20.times do
-  IngredientsRecipe.create(amount: rand(20), measurement: Faker::Food.metric_measurement, recipe: Recipe.all.sample, ingredient: Ingredient.all.sample)
+  IngredientsRecipe.create(amount: rand(20), measurement: Faker::Lorem.word, recipe: Recipe.all.sample, ingredient: Ingredient.all.sample)
 end
 
 100.times do
