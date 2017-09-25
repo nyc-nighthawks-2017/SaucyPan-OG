@@ -49,6 +49,9 @@ Rails.application.routes.draw do
 	get '/ingredients/:ingredient_id' => 'ingredients#show'
 	put '/ingredients/:ingredient_id' => 'ingredients#update'
 
+	get '/recipes/:recipe_id/ratings' => 'ratings#recipe_index'
+	get '/users/:user_id/ratings' => 'ratings#user_index'
+
 
 
 end
