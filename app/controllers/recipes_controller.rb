@@ -2,13 +2,14 @@ class RecipesController < ApplicationController
 	def index
 		@recipes = Recipe.all
     	render json: @recipes
-	end 
+	end
 
 	def show
 		@recipe = Recipe.find_by(id: params[:id])
    	 	@ingredients = @recipe.ingredients.order(:item_id)
     	@user = @recipe.submitter
-	end 
+			render json: @recipe
+	end
 
 	def create
 		@recipe = Recipe.new
@@ -20,6 +21,7 @@ class RecipesController < ApplicationController
 	    @recipe.creator = params[:recipe][:creator]
 	    @recipe.submitter = current_user
 	    @recipe.save
+			render json: @recipe
 	end
 
 end
