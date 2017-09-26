@@ -22,13 +22,13 @@ class RecipesController < ApplicationController
 	    @recipe.save
 
 	    params[:Ingredients_recipes].each do | ingredient |
-      	if (Ingredient.find_by(name: ingredient[:name]))
-        	@component = Ingredient.find_by(name: ingredient[:name]))
-      	else
-         	@component = Ingredient.new
-         	@component.name = ingredient[:name]
-         	@component.save
-      	end
+      		if (Ingredient.find_by(name: ingredient[:name]))
+        		@component = Ingredient.find_by(name: ingredient[:name]))
+      		else
+         		@component = Ingredient.new
+         		@component.name = ingredient[:name]
+         		@component.save
+      		end
 
       	ing = Ingredients_recipes.new
       	ing.amount = Ingredients_recipes[:amount]
@@ -36,14 +36,25 @@ class RecipesController < ApplicationController
       	ing.recipe = @recipe
       	ing.name = @component
       	ing.save
-    end
+    	end
       
 	end
+
+	def update
+		recipe = Recipe.find_by(name: params[:name])
+    	recipe.update(recipe_params)
+    	recipe.save
+    	render json: recipe
+	end 
 
 	def delete 
 		recipe = Recipe.find_by(id: params[:recipe_id])
     	recipe.destroy
 	end 
 
+	 private
+  	def recipe_params
+    	params.require(:recipe).permit(:name)
+  	end
 
 end
