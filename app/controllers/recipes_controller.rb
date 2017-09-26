@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 	    @recipe.submitter = current_user
 	    @recipe.save
 
-	    params[:Ingredients_recipes].each do | ingredient |
+	    params[:IngredientsRecipes].each do | ingredient |
       		if (Ingredient.find_by(name: ingredient[:name]))
         		@component = Ingredient.find_by(name: ingredient[:name]))
       		else
@@ -30,9 +30,9 @@ class RecipesController < ApplicationController
          		@component.save
       		end
 
-      	ing = Ingredients_recipes.new
-      	ing.amount = Ingredients_recipes[:amount]
-      	ing.measurement = Ingredients_recipes[:measurement]
+      	ing = IngredientsRecipes.new
+      	ing.amount = IngredientsRecipes[:amount]
+      	ing.measurement = IngredientsRecipes[:measurement]
       	ing.recipe = @recipe
       	ing.name = @component
       	ing.save
