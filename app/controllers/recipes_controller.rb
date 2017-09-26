@@ -20,6 +20,30 @@ class RecipesController < ApplicationController
 	    @recipe.creator = params[:recipe][:creator]
 	    @recipe.submitter = current_user
 	    @recipe.save
+
+	    params[:Ingredients_recipes].each do | ingredient |
+      	if (Ingredient.find_by(name: ingredient[:name]))
+        	@component = Ingredient.find_by(name: ingredient[:name]))
+      	else
+         	@component = Ingredient.new
+         	@component.name = ingredient[:name]
+         	@component.save
+      	end
+
+      	ing = Ingredients_recipes.new
+      	ing.amount = Ingredients_recipes[:amount]
+      	ing.measurement = Ingredients_recipes[:measurement]
+      	ing.recipe = @recipe
+      	ing.name = @component
+      	ing.save
+    end
+      
 	end
+
+	def delete 
+		recipe = Recipe.find_by(id: params[:recipe_id])
+    	recipe.destroy
+	end 
+
 
 end
