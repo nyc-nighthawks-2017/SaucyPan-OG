@@ -12,16 +12,22 @@ class RecipesController < ApplicationController
 	end
 
 	def create
+		puts params
+		# Parameters: {"recipeName"=>"blah", "category"=>"Appetizer", "difficultyLevel"=>"5", "ingredient"=>"nada", "prepTime"=>"2", "directions"=>"nada", "creator"=>"nada"}
 		@recipe = Recipe.new
-    	@recipe.name = params[:recipe][:name]
-   	 	@recipe.category = params[:recipe][:category]
-	    @recipe.difficulty_level = params[:recipe][:difficulty_level]
-	    @recipe.directions = params[:recipe][:directions]
-	    @recipe.prep_time = params[:recipe][:prep_time]
-	    @recipe.creator = params[:recipe][:creator]
-	    @recipe.submitter = current_user
-	    @recipe.save
-			render json: @recipe
+    	@recipe.name = params[:recipeName]
+   	 	@recipe.category = params[:category]
+	    @recipe.difficulty_level = params[:difficultyLevel]
+	    @recipe.instructions.push(Instruction.create(step: params[:directions], position: 1))
+			# @recipe.ingredients.push(Ingredient.create(name: params[:ingredient]))
+	    @recipe.prep_time = params[:prepTime]
+	    @recipe.creator = params[:creator]
+	    @recipe.submitter = User.first
+	    if @recipe.save
+				render json: @recipe.instructions
+			else
+				puts @recipe.errors.full_messages
+			end
 	end
 
 end
