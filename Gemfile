@@ -22,6 +22,7 @@ gem 'faker'
 gem 'pry'
 gem 'pry-byebug'
 gem 'pry-rails'
+gem 'rack-cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
